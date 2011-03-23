@@ -8,10 +8,25 @@
 //endconfig
 
 function iCabMobileEnableAirplay() {
-    [].slice.call(document.querySelectorAll('embed, video'), 0).map(function(el) {
-        el.setAttribute('x-webkit-airplay', 'allow');
-        el.setAttribute('airplay', 'allow');
-    });
+    var n=document.getElementsByTagName("video");
+    for(var i=0; i<n.length; i++) {
+        var v=document.createAttribute("x-webkit-airplay");
+        v.value="allow";
+        var h=n[i].cloneNode(true);
+        h.setAttributeNode(v);
+        var p=n[i].parentNode;p.removeChild(n[i]);
+        p.appendChild(h);
+    };
+    var n2=document.getElementsByTagName("embed");
+    for(var i=0; i<n2.length; i++) {
+        var v=document.createAttribute("airplay");
+        v.value="allow";
+        var h=n[i].cloneNode(true);
+        h.setAttributeNode(v);
+        var p=n[i].parentNode;
+        p.removeChild(n[i]);
+        p.appendChild(h);
+    }
 }
 
 var doAction = (confirmation == false);
